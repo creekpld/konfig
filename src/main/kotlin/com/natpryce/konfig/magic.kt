@@ -20,7 +20,7 @@ open class PropertyGroup(private val outer: PropertyGroup? = null) : PropertyKey
             throw IllegalArgumentException("cannot determine name of property group")
 
     fun <T> key(keySimpleName: String, type: (PropertyLocation, String) -> T): Key<T> {
-        return Key((name() + "." + keySimpleName).replace('_', '-'), type)
+        return Key(name = (name() + "." + keySimpleName).replace('_', '-'), parse = type)
     }
 }
 
@@ -28,4 +28,4 @@ operator fun <G : PropertyGroup, T> ((PropertyLocation, String) -> T).getValue(g
         group.key(property.name, this)
 
 operator fun <SCOPE, T> ((PropertyLocation, String) -> T).getValue(scope: SCOPE?, property: KProperty<*>) =
-        Key(property.name, this)
+        Key(name = property.name, parse = this)
