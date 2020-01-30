@@ -30,7 +30,7 @@ data class Key<out T>(
     val name: String,
     val parse: (PropertyLocation, String) -> T,
     val isOptional: Boolean = false,
-    val requiredOn: (List<Pair<Key<T>, T?>>)? = null
+    val requiredOn: (List<Pair<Key<Any>, Any?>>)? = null
 ) {
     fun getOrNullBy(lookup: (String) -> Pair<PropertyLocation, String?>): T? {
         val (propertyLocation, stringValue) = lookup(name)

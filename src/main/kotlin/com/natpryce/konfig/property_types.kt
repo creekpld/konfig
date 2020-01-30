@@ -22,7 +22,7 @@ sealed class ParseResult<T> {
 
 typealias PropertyType<T> = (PropertyLocation, String) -> T
 
-fun <T> propertyType(typeName: String, parse: (String) -> ParseResult<T>, isOptional: Boolean = false): PropertyType<T> {
+fun <T> propertyType(typeName: String, parse: (String) -> ParseResult<T>): PropertyType<T> {
     return { location, stringValue ->
         val parsed = parse(stringValue)
         when (parsed) {
